@@ -4,7 +4,7 @@ import disnake
 from disnake.ext.commands import Bot
 from dotenv import load_dotenv
 
-from config import PREFIX, SYSTEM_CHANNEL_ID, NAME
+from config import PREFIX, TOKEN
 
 
 load_dotenv()
@@ -23,12 +23,20 @@ class DiscordBot(Bot):
         print(f"Bot {self.user} is ready")
 
     async def on_message(self, message: disnake.Message) -> None:
-        if message.author.name != NAME:
-            channel = self.get_channel(SYSTEM_CHANNEL_ID)
-            await channel.send(content=message.content)
+        pass
+
+    async def load_cogs(self) -> None:
+        for file in os.listdir(f"{os.path.realpath(os.path.dirname(__file__))}/cogs"):
+            if file.endswith('.py'):
+                extension = file[:-3]
+                try:
+                    self.load_extension(f"cogs.{extension}")
+                except Exception as e:
+                    print(e)
 
 
 bot = DiscordBot()
 
 if __name__ == '__main__':
-    bot.run(os.getenv('TOKEN'))
+    bot.run(TOKEN)
+
