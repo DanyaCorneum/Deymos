@@ -1,3 +1,4 @@
+import logging
 import os
 
 import disnake
@@ -6,6 +7,8 @@ from dotenv import load_dotenv
 
 from config import PREFIX, TOKEN, SYSTEM_CHANNEL_ID, NEW_MEMBER_ROLE_ID
 
+log = logging.getLogger('Deymos_log')   # for future
+log.setLevel(logging.INFO)
 
 load_dotenv()
 
