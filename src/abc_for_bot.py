@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import asyncio
 import sqlite3 as sq
 import os
 
@@ -17,7 +18,7 @@ class ABCDataBase(ABC):
         with sq.connect(self.__db_name) as db:
             cur = db.cursor()
             cur.execute(f"""CREATE TABLE IF NOT EXISTS {self.__table_name} (
-            id INT
+            id INT,
             username TEXT
             )""")
             db.commit()
@@ -25,9 +26,21 @@ class ABCDataBase(ABC):
 
     async def delete_db(self):
         os.remove(self.__db_name)
-        
+
+    @property
+    def db_name(self):
+        return self.__db_name
+
+    @db_name.setter
+    def db_name(self, value):
+        self.__db_name = value
+
+    @db_name.getter
+    def db_name(self):
+        return self.__db_name
+
     @abstractmethod
-    async def add_user(self):
+    async def add_user(self, user):
         pass
 
     @abstractmethod
