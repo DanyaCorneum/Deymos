@@ -6,5 +6,5 @@ from dotenv import load_dotenv
 load_dotenv()
 
 NAME = os.getenv('NAME')
-PREFIX=os.getenv('PREFIX')
+PREFIX = os.getenv('PREFIX')
 SYSTEM_CHANNEL_ID = os.getenv('SYSTEM_CHANNEL_ID')
