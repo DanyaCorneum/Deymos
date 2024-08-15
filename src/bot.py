@@ -7,7 +7,7 @@ from disnake.ext.commands import Bot
 from dotenv import load_dotenv
 
 from abc_for_bot import ABCDataBase
-from config import PREFIX, SYSTEM_CHANNEL_ID, NAME
+from config import PREFIX, SYSTEM_CHANNEL_ID, TOKEN, NEW_MEMBER_ROLE_ID
 
 
 load_dotenv()
@@ -43,7 +43,6 @@ class DiscordBot(Bot):
         self.load_cogs()
         self.db_user = database
         self.logger = logger
-
 
     async def on_ready(self):
         await self.db_user.init_table()
