@@ -1,2 +1,7 @@
 venv
 .env
+*.db
+/test
+/logs
+.idea
+/__pycache__
