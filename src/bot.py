@@ -12,7 +12,7 @@ from config import PREFIX, SYSTEM_CHANNEL_ID, NAME
 load_dotenv()
 
 
-class BotLogger: # I will do it soon
+class BotLogger:  # I will do it soon
     pass
 
 
@@ -50,12 +50,9 @@ class DiscordBot(Bot):
         print(f"Bot {self.user} is ready")
 
     async def on_member_join(self, member: disnake.Member):
-        channel = self.get_channel(1145968788987199559)
+        channel = self.get_channel(SYSTEM_CHANNEL_ID)
         await channel.send(content=f'Hello {member.name}')
         await self.db_user.add_user(member)
-
-    async def on_message(self, message: disnake.Message) -> None:
-        pass
 
 
 bot = DiscordBot(UserDatabase('user.db', 'user'))
